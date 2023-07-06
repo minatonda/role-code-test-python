@@ -1,25 +1,25 @@
-def map_to_dict(header: int, lines: list[str]):
+def map_to_dict(__header: int, __lines: list[str]):
     sorted = {}
-    for idl, line in enumerate(lines):
+    for idl, line in enumerate(__lines):
         if idl == 0:
             continue
 
         values = line.strip().split(",")
-        header_value = values[header]
+        header_value = values[__header]
 
         sorted[header_value] = values
 
     return sorted
 
 
-def map_to_dict_distinct(header: int, lines: list[str]):
+def map_to_dict_distinct(__header: int, __lines: list[str]):
     sorted = {}
-    for idl, line in enumerate(lines):
+    for idl, line in enumerate(__lines):
         if idl == 0:
             continue
 
         values = line.strip().split(",")
-        header_value = values[header]
+        header_value = values[__header]
 
         if header_value not in sorted:
             sorted[header_value] = []
@@ -114,7 +114,7 @@ def buildAnwser2(
     write_csv_from_list(data, "bills.csv")
 
 
-def write_csv_from_list(data: list, filename: str):
+def write_csv_from_list(__data: list, __filename: str):
     lines = list(
         map(
             lambda value: ",".join(
@@ -123,11 +123,11 @@ def write_csv_from_list(data: list, filename: str):
                     value,
                 )
             ),
-            data,
+            __data,
         )
     )
 
-    with open(filename, "w") as f:
+    with open(__filename, "w") as f:
         f.write("\n".join(lines))
 
 
