@@ -1,9 +1,3 @@
-l_bills = open("./data/bills.csv", "r").readlines()
-l_legislators = open("./data/legislators.csv", "r").readlines()
-l_vote_results = open("./data/vote_results.csv", "r").readlines()
-l_votes = open("./data/votes.csv", "r").readlines()
-
-
 def map_to_dict(header: int, lines: list[str]):
     sorted = {}
     for idl, line in enumerate(lines):
@@ -87,7 +81,7 @@ def buildAnwser1(__votes_per_legislator: dict, __d_legislators: dict):
             )
         ),
     ]
-    write_csv_from_list(data,"legislators-support-oppose-count.csv")
+    write_csv_from_list(data, "legislators-support-oppose-count.csv")
 
 
 def buildAnwser2(
@@ -137,17 +131,15 @@ def write_csv_from_list(data: list, filename: str):
         f.write("\n".join(lines))
 
 
-# per id
-d_legislators = map_to_dict(0, l_legislators)
+l_bills = open("./data/bills.csv", "r").readlines()
+l_legislators = open("./data/legislators.csv", "r").readlines()
+l_vote_results = open("./data/vote_results.csv", "r").readlines()
+l_votes = open("./data/votes.csv", "r").readlines()
 
-# per legislator id
-d_bills = map_to_dict(0, l_bills)
-
-# per legislator id
-d_vote_results = map_to_dict_distinct(1, l_vote_results)
-
-# per bill id
-d_votes = map_to_dict(0, l_votes)
+d_legislators = map_to_dict(0, l_legislators)  # per id
+d_bills = map_to_dict(0, l_bills)  # per legislator id
+d_vote_results = map_to_dict_distinct(1, l_vote_results)  # per legislator id
+d_votes = map_to_dict(0, l_votes)  # per bill id
 
 votes_per_legislator = get_votes_per_legislator(d_vote_results)
 bills_votes_per_legislator = get_bills_votes_per_legislator(
